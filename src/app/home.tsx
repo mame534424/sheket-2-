@@ -16,9 +16,14 @@ export default function HomePage() {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center", gap: 16 }}>
       <Text style={{ fontSize: 24, fontWeight: "bold" }}>Home</Text>
+        <View className="flex-1 items-center justify-center bg-white">
+            <Text className="text-2xl font-bold text-red-600">NativeWind works</Text>
+        </View>
 
-      <Text>Welcome:</Text>
-      <Text>{user?.primaryEmailAddress?.emailAddress}</Text>
+      <Text
+      className="text-2xl font-bold text-red-600"
+      >Welcome:</Text>
+      <Text className="text-lg">{user?.primaryEmailAddress?.emailAddress}</Text>
 
       <TouchableOpacity
         onPress={async () => {
