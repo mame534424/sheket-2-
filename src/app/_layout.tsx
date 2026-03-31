@@ -1,16 +1,17 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import React from 'react';
-import { useColorScheme } from 'react-native';
+import { ClerkProvider } from "@clerk/clerk-expo";
+import { Stack } from "expo-router";
+import { tokenCache } from "../../lib/clerk";
 
-import { AnimatedSplashOverlay } from '@/components/animated-icon';
-import AppTabs from '@/components/app-tabs';
+const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+export default function RootLayout() {
+  if (!publishableKey) {
+    throw new Error("Missing EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY");
+  }
+
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <AnimatedSplashOverlay />
-      <AppTabs />
-    </ThemeProvider>
+    <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
+      <Stack screenOptions={{ headerShown: false }} />
+    </ClerkProvider>
   );
 }
