@@ -1,4 +1,6 @@
 import { useSSO } from "@clerk/clerk-expo";
+import * as Linking from "expo-linking";
+import { router } from "expo-router";
 import { useState } from "react";
 import { Alert } from "react-native";
 
@@ -16,12 +18,17 @@ const useSocialAuth = () => {
         setloadingStrategy(strategy);
 
         try { 
-            const {createdSessionId,setActive}= await startSSOFlow({strategy});
+            const {createdSessionId,setActive}= await startSSOFlow({
+                strategy,
+                redirectUrl: Linking.createURL("/sso-callback"),
+            });
+            // added linking to ensure when the auth completed it redirect into home page 
             if(!createdSessionId || !setActive){
                 Alert.alert("Sign-in incomplete","Sign-in was not completed. Please try again.");
                 return;
             }
             await setActive({session:createdSessionId});
+            router.replace("/home");
     }
     catch(error){
         console.log("Social auth error:",error);
