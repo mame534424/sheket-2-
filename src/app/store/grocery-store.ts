@@ -42,6 +42,7 @@ export const useGroceryStore = create<GroceryStore>((set, get) => ({
   loadItems: async () => {
     set({ isLoading: true, error: null });
     try {
+      console.log("loading items ....")
       const res = await fetch("/api/items");
       const payload = (await res.json()) as ItemsResponse;
 
