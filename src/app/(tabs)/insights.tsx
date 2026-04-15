@@ -6,9 +6,11 @@ import InsightStatsSection from '../components/insight/InsightStatsSection'
 import InsightCategorySection from '../components/insight/InsightCategorySection'
 import InsightsPrioritySection from '../components/insight/InsightsPrioritySection'
 import ClearCompletedButton from '../components/insight/ClearCompletedButton'
+import SentryFeedbackButton from '../components/insight/SentryFeedbackButton'
 
 const insightsScreen = () => {
   return (
+    <>
     <ScrollView
       className="bg-background flex-1 py-4"
       showsVerticalScrollIndicator={false}
@@ -24,6 +26,9 @@ const insightsScreen = () => {
         <InsightsPrioritySection/>
         <ClearCompletedButton />
       </ScrollView>
+      
+      <SentryFeedbackButton />
+      </>
   )
 }
 
